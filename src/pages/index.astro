@@ -1,0 +1,119 @@
+---
+// import type { Publication } from '@/content/config';
+// import type { RecordType } from 'astro:schema';
+// import type { ProfileItem } from '@/content/config';
+import type { AddressKeys } from '@/lib/profile';
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Section from '@/components/ProfileSection.astro';
+import ProfileImage from '@/assets/imgs/profile.png';
+import { PROFILE } from '@/lib/profile';
+import { SKILLS } from '@/lib/skills';
+
+type ProfileItem = {
+  title: string;
+  description?: string;
+  homepage?: string;
+};
+
+const links = ['github', 'linkedin', 'email'] as AddressKeys[];
+
+const courses: ProfileItem[] = (await getCollection('courses')).map(
+  ({ data }) => ({
+    title: data.title,
+    description: data.description,
+    homepage: data.homepage,
+  })
+);
+
+const educations: ProfileItem[] = (await getCollection('educations')).map(
+  ({ data }) => ({
+    title: data.description,
+    description: data.title,
+    homepage: data.homepage,
+  })
+);
+
+const experiences: ProfileItem[] = (await getCollection('experiences')).map(
+  ({ data }) => ({
+    title: data.description,
+    description: data.title,
+    homepage: data.homepage,
+  })
+);
+
+const occupations: ProfileItem[] = [...educations, ...experiences];
+
+const projects: ProfileItem[] = (await getCollection('projects')).map(
+  ({ data }) => ({
+    title: data.title,
+    description: data.description,
+    homepage: data.homepage,
+  })
+);
+
+const publications: ProfileItem[] = (await getCollection('publications')).map(
+  ({ data: { year, title, url } }) => ({
+    title: String(year),
+    description: title,
+    homepage: url,
+  })
+);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{PROFILE.name}</title>
+  </head>
+  <body class="text-lg">
+    <div class="container max-w-screen-md mx-auto space-y-14 px-4 py-6">
+      <div class="space-y-8 text-lg">
+        <h1 class="text-3xl font-bold">{PROFILE.name}</h1>
+
+        <div class="flex gap-8 flex-col sm:flex-row">
+          <Image
+            src={ProfileImage}
+            alt={PROFILE.name}
+            class="rounded-md w-32 border border-black"
+          />
+
+          <div class="space-y-4">
+            <p>{PROFILE.description}</p>
+
+            <nav>
+              <ul class="flex gap-4">
+                {
+                  links.map((link) => (
+                    <li>
+                      <a
+                        href={PROFILE.addresses[link]}
+                        class="underline capitalize hover:no-underline"
+                        target="_blank"
+                      >
+                        {link}
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      {SKILLS && <Section title="Habilidades" collection={SKILLS} />}
+      {
+        occupations && (
+          <Section title="Trabalho & Formação" collection={occupations} />
+        )
+      }
+      {courses && <Section title="Ensino" collection={courses} />}
+      {projects && <Section title="Projetos" collection={projects} />}
+      {publications && <Section title="Publicação" collection={publications} />}
+    </div>
+  </body>
+</html>
