@@ -11,11 +11,13 @@ const links = ['github', 'linkedin', 'email'] as AddressKeys[];
   <h1 class="text-3xl font-bold">{PROFILE.name}</h1>
 
   <div class="flex gap-8 flex-col sm:flex-row">
-    <Image
-      src={ProfileImage}
-      alt={PROFILE.name}
-      class="rounded-md w-32 border border-black"
-    />
+    <a href="/compact">
+      <Image
+        src={ProfileImage}
+        alt={PROFILE.name}
+        class="rounded-md w-32 border border-black"
+      />
+    </a>
 
     <div class="space-y-4">
       <p>{PROFILE.description}</p>

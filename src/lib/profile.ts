@@ -10,20 +10,22 @@ export type AddressKeys =
   | 'threads'
   | 'bluesky'
   | 'twitter'
+  | 'figma'
+  | 'homepage'
   | 'email';
 
 export type Profile = {
   name: string;
   description: string;
-  homepage: string;
   addresses: Record<AddressKeys, string>;
 };
 
 export const PROFILE: Profile = {
   name: 'Luiz Carlos Chaves',
-  description: 'Professor do IFPB especializado na construção de sistemas Web.',
-  homepage: '',
+  description:
+    'Professor do IFPB especializado na construção de sistemas Web, e pós-graduação em visualização de dados.',
   addresses: {
+    homepage: 'https://luizchaves.github.io',
     github: 'https://github.com/luizchaves',
     linkedin: 'https://www.linkedin.com/in/luizcarloschaves/',
     lattes: 'http://lattes.cnpq.br/7165875430419020',
@@ -37,5 +39,6 @@ export const PROFILE: Profile = {
     bluesky: 'https://bsky.app/profile/luizcarloschaves.bsky.social',
     twitter: 'http://twitter.com/luizchavesjp',
     email: 'mailto:luiz.chaves@ifpb.edu.br',
+    figma: 'https://www.figma.com/@luizchaves',
   },
 };

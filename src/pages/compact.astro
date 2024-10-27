@@ -1,0 +1,116 @@
+---
+import type { AddressKeys } from '@/lib/profile';
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import ProfileImage from '@/assets/imgs/profile.png';
+import { PROFILE } from '@/lib/profile';
+import { linkSync } from 'fs';
+
+type Link = {
+  name: AddressKeys;
+  icon: string;
+  size: number;
+};
+
+const links = [
+  {
+    name: 'homepage',
+    icon: 'ph:identification-badge',
+    size: 32,
+  },
+  {
+    name: 'github',
+    icon: 'icon-park:github-one',
+    size: 32,
+  },
+  {
+    name: 'linkedin',
+    icon: 'ph:linkedin-logo',
+    size: 32,
+  },
+  // {
+  //   name: 'figma',
+  //   icon: 'ph:figma-logo',
+  //   size: 32,
+  // },
+  {
+    name: 'bluesky',
+    icon: 'fa6-brands:bluesky',
+    size: 36,
+  },
+  {
+    name: 'email',
+    icon: 'ph:envelope-simple',
+    size: 32,
+  },
+  {
+    name: 'instagram',
+    icon: 'ph:instagram-logo',
+    size: 32,
+  },
+  {
+    name: 'researchgate',
+    icon: 'la:researchgate',
+    size: 36,
+  },
+  {
+    name: 'lattes',
+    icon: 'academicons:lattes',
+    size: 30,
+  },
+  {
+    name: 'orcid',
+    icon: 'la:orcid',
+    size: 36,
+  },
+  {
+    name: 'googleScholar',
+    icon: 'academicons:google-scholar',
+    size: 36,
+  },
+] as Link[];
+
+console.log(linkSync);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{PROFILE.name}</title>
+  </head>
+  <body class="min-h-screen flex justify-center items-center px-4">
+    <main class="flex flex-col items-center text-center space-y-4">
+      <a href="/">
+        <Image
+          src={ProfileImage}
+          alt={PROFILE.name}
+          class="rounded-full w-56 border border-black"
+        />
+      </a>
+      <p class="text-3xl font-bold">Olá, sou Luiz Carlos!</p>
+      <p>Professor @IFPB</p>
+      <p class="text-lg">Atuação em sistemas Web e visualização de dados.</p>
+      <div class="flex flex-wrap justify-center gap-4 max-w-sm">
+        {
+          links.map((link) => (
+            <a
+              href={PROFILE.addresses[link.name]}
+              class="rounded-full border-black border-2 size-14 flex items-center justify-center hover:bg-gray-200"
+              title={link.name}
+              target="_blank"
+            >
+              <Icon
+                name={link.icon}
+                size={link.size}
+                class={`${link.name}-person-link`}
+              />
+            </a>
+          ))
+        }
+      </div>
+    </main>
+  </body>
+</html>
