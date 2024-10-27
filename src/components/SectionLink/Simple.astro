@@ -1,0 +1,16 @@
+---
+import BaseLink from '@/components/SectionLink/BaseLink.astro';
+
+type Props = {
+  title: string;
+  description: string;
+  homepage: string;
+};
+
+const { title, description, homepage } = Astro.props as Props;
+---
+
+<BaseLink href={homepage}>
+  <p class="md:w-1/4">{title}</p>
+  <p class="md:flex-1 text-gray-500">{description}</p>
+</BaseLink>

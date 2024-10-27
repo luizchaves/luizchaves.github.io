@@ -1,3 +1,6 @@
+code: LS
 title: Linguagem de Script
-description: Disciplina do Curso Superior de Sistemas para Internet do IFPB.
+course: CSTSI
+campus: IFPB-JP
+description: Conceitos sobre linguagens de script para processamentos de Front-end.
 homepage: https://ifpb.github.io/ls

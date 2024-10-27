@@ -1,0 +1,22 @@
+---
+import type { Publication } from '@/components/SectionLink/Publication.astro';
+import { getCollection } from 'astro:content';
+import BaseSection from '@/components/ProfileSection/BaseSection.astro';
+import SectionLink from '@/components/SectionLink';
+
+const publications: Publication[] = (await getCollection('publications')).map(
+  ({ data: { year, title, url } }) => ({ year, title, url })
+);
+---
+
+{
+  publications.length && (
+    <BaseSection title="Publicações">
+      <nav>
+        {publications.map((publication) => (
+          <SectionLink.Publication {...publication} />
+        ))}
+      </nav>
+    </BaseSection>
+  )
+}

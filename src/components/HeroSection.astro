@@ -1,0 +1,42 @@
+---
+import type { AddressKeys } from '@/lib/profile';
+import { Image } from 'astro:assets';
+import ProfileImage from '@/assets/imgs/profile.png';
+import { PROFILE } from '@/lib/profile';
+
+const links = ['github', 'linkedin', 'email'] as AddressKeys[];
+---
+
+<div class="space-y-8 text-lg">
+  <h1 class="text-3xl font-bold">{PROFILE.name}</h1>
+
+  <div class="flex gap-8 flex-col sm:flex-row">
+    <Image
+      src={ProfileImage}
+      alt={PROFILE.name}
+      class="rounded-md w-32 border border-black"
+    />
+
+    <div class="space-y-4">
+      <p>{PROFILE.description}</p>
+
+      <nav>
+        <ul class="flex gap-4">
+          {
+            links.map((link) => (
+              <li>
+                <a
+                  href={PROFILE.addresses[link]}
+                  class="underline capitalize hover:no-underline"
+                  target="_blank"
+                >
+                  {link}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+---
+import BaseLink from '@/components/SectionLink/BaseLink.astro';
+
+export type Publication = {
+  year: number;
+  title: string;
+  url: string;
+};
+
+const { year, title, url } = Astro.props as Publication;
+---
+
+<BaseLink href={url}>
+  <p>
+    <span>{title}</span>,
+    <span>{year}</span>
+  </p>
+</BaseLink>

@@ -1,0 +1,46 @@
+---
+import type { Occupation } from '@/components/SectionLink/Occupation.astro';
+import { getCollection } from 'astro:content';
+import BaseSection from '@/components/ProfileSection/BaseSection.astro';
+import SectionLink from '@/components/SectionLink';
+
+const educations: Occupation[] = (await getCollection('educations')).map(
+  ({ data }) => ({
+    place: data.school,
+    homepage: data.homepage,
+    occupation: data.title,
+    startDate: data.startDate,
+    endDate: data.endDate,
+  })
+);
+
+const experiences: Occupation[] = (await getCollection('experiences')).map(
+  ({ data }) => ({
+    place: data.company,
+    homepage: data.homepage,
+    occupation: data.title,
+    startDate: data.startDate,
+    endDate: data.endDate,
+  })
+);
+
+const occupations: Occupation[] = [...educations, ...experiences];
+
+occupations.sort((a, b) => {
+  if (a.endDate === '-' && b.endDate !== '-') return -1;
+  if (a.endDate !== '-' && b.endDate === '-') return 1;
+  return Number(b.endDate) - Number(a.endDate);
+});
+---
+
+{
+  occupations.length && (
+    <BaseSection title="Trabalho & Formação">
+      <nav>
+        {occupations.map((occupation) => (
+          <SectionLink.Occupation {...occupation} />
+        ))}
+      </nav>
+    </BaseSection>
+  )
+}

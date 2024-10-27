@@ -36,6 +36,6 @@ export const PROFILE: Profile = {
     threads: 'https://www.threads.net/@luizcrchves',
     bluesky: 'https://bsky.app/profile/luizcarloschaves.bsky.social',
     twitter: 'http://twitter.com/luizchavesjp',
-    email: 'luiz.chaves@ifpb.edu.br',
+    email: 'mailto:luiz.chaves@ifpb.edu.br',
   },
 };

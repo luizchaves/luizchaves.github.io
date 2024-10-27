@@ -1,0 +1,18 @@
+---
+import { SKILLS } from '@/lib/skills';
+import BaseSection from '@/components/ProfileSection/BaseSection.astro';
+
+SKILLS.sort((a, b) => a.title.localeCompare(b.title));
+---
+
+{
+  SKILLS.length && (
+    <BaseSection title="Habilidades">
+      <div class="flex flex-wrap gap-4">
+        {SKILLS.map((skill) => (
+          <p>{skill.title}</p>
+        ))}
+      </div>
+    </BaseSection>
+  )
+}

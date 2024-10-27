@@ -1,3 +1,6 @@
+code: DW
 title: Desenvolvimento Web
-description: Disciplina do Curso Superior de Redes de Computadores do IFPB.
-homepage: https://ifpb.github.io/lp2
+course: CSTRC
+campus: IFPB-JP
+description: Conceitos sobre desenvolvimento de sistemas Web utilizando banco de dados.
+homepage: https://ifpb.github.io/dw

@@ -1,10 +1,34 @@
 import { loadPublications } from '@/lib/publication';
 import { z, defineCollection } from 'astro:content';
 
-export type Publication = z.infer<typeof publication>;
-export type ProfileItem = z.infer<typeof profileItem>;
+const course = z.object({
+  code: z.string(),
+  title: z.string(),
+  course: z.string(),
+  campus: z.string(),
+  description: z.string(),
+  homepage: z.string(),
+});
 
-export const profileItem = z.object({
+const education = z.object({
+  title: z.string(),
+  school: z.string(),
+  homepage: z.string().optional(),
+  description: z.string(),
+  startDate: z.number(),
+  endDate: z.union([z.number(), z.literal('-')]),
+});
+
+const experience = z.object({
+  title: z.string(),
+  company: z.string(),
+  homepage: z.string(),
+  description: z.string(),
+  startDate: z.number(),
+  endDate: z.union([z.number(), z.literal('-')]),
+});
+
+const project = z.object({
   title: z.string(),
   description: z.string().optional(),
   homepage: z.string().optional(),
@@ -20,22 +44,22 @@ const publication = z.object({
 
 const courseCollection = defineCollection({
   type: 'data',
-  schema: profileItem,
+  schema: course,
 });
 
 const experienceCollection = defineCollection({
   type: 'data',
-  schema: profileItem,
+  schema: experience,
 });
 
 const educationCollection = defineCollection({
   type: 'data',
-  schema: profileItem,
+  schema: education,
 });
 
 const projectCollection = defineCollection({
   type: 'data',
-  schema: profileItem,
+  schema: project,
 });
 
 const publicationCollection = defineCollection({

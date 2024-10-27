@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import BaseSection from '@/components/ProfileSection/BaseSection.astro';
+import SectionLink from '@/components/SectionLink';
+
+type Project = {
+  title: string;
+  description: string;
+  homepage: string;
+};
+
+const projects: Project[] = (await getCollection('projects')).map(
+  ({ data }) => ({
+    title: data.title,
+    description: data.description,
+    homepage: data.homepage,
+  })
+);
+---
+
+{
+  projects.length && (
+    <BaseSection title="Projetos">
+      <nav>
+        {projects.map((occupation) => (
+          <SectionLink.Simple {...occupation} />
+        ))}
+      </nav>
+    </BaseSection>
+  )
+}

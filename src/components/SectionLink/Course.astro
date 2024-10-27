@@ -1,0 +1,22 @@
+---
+import BaseLink from '@/components/SectionLink/BaseLink.astro';
+
+export type Course = {
+  code: string;
+  title: string;
+  course: string;
+  campus: string;
+  homepage: string;
+  description: string;
+};
+
+const { code, title, course, campus, description, homepage } =
+  Astro.props as Course;
+
+const [, campusCode] = campus.split('-');
+---
+
+<BaseLink href={homepage}>
+  <p class="md:w-1/4">{course}-{code}-{campusCode}</p>
+  <p class="flex-1 text-gray-500">{title}: {description}</p>
+</BaseLink>

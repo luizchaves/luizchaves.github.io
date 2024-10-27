@@ -1,0 +1,32 @@
+---
+import BaseLink from '@/components/SectionLink/BaseLink.astro';
+
+export type Occupation = {
+  place: string;
+  homepage: string;
+  occupation: string;
+  startDate: number;
+  endDate: number | '-';
+};
+
+const { place, occupation, homepage, startDate, endDate } =
+  Astro.props as Occupation;
+---
+
+<BaseLink href={homepage} class="flex-row flex-wrap justify-start gap-2">
+  <p class="md:w-1/4">{place}</p>
+  <p class="md:flex-1 text-gray-500 order-1 md:order-none basis-full">
+    {occupation}
+  </p>
+  <p class="text-gray-500 flex">
+    <span class="tabular-nums">{startDate}</span>
+    <span>-</span>
+    {
+      endDate === '-' ? (
+        <span class="tabular-nums text-transparent">00</span>
+      ) : (
+        <span class="tabular-nums">{String(endDate).slice(2)}</span>
+      )
+    }
+  </p>
+</BaseLink>
