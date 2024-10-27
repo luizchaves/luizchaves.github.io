@@ -16,6 +16,7 @@ const links = ['github', 'linkedin', 'email'] as AddressKeys[];
         src={ProfileImage}
         alt={PROFILE.name}
         class="rounded-md w-32 border border-black"
+        loading="eager"
       />
     </a>
 
@@ -23,7 +24,7 @@ const links = ['github', 'linkedin', 'email'] as AddressKeys[];
       <p>{PROFILE.description}</p>
 
       <nav>
-        <ul class="flex gap-4">
+        <ul class="flex flex-wrap gap-4">
           {
             links.map((link) => (
               <li>

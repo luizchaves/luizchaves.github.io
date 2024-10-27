@@ -1,0 +1,26 @@
+---
+import type { Activity } from '@/components/SectionItem/Activity.astro';
+import BaseLink from '@/components/SectionLink/BaseLink.astro';
+import SectionItem from '@/components/SectionItem';
+
+export type ActivityLink = Activity & {
+  url: string;
+};
+
+const { name, description, url, startDate, endDate } =
+  Astro.props as ActivityLink;
+
+const props = { name, description, startDate, endDate };
+---
+
+{
+  !!url ? (
+    <BaseLink href={url} class="flex-row flex-wrap justify-start gap-2">
+      <SectionItem.Activity {...props} />
+    </BaseLink>
+  ) : (
+    <SectionItem.Simple class="flex-row flex-wrap justify-start gap-2">
+      <SectionItem.Activity {...props} />
+    </SectionItem.Simple>
+  )
+}

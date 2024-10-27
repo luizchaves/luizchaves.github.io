@@ -1,20 +1,24 @@
 ---
-import type { Publication } from '@/components/SectionLink/Publication.astro';
+import type { SimpleLink } from '@/components/SectionLink/Simple.astro';
 import { getCollection } from 'astro:content';
 import BaseSection from '@/components/ProfileSection/BaseSection.astro';
 import SectionLink from '@/components/SectionLink';
 
-const publications: Publication[] = (await getCollection('publications')).map(
-  ({ data: { year, title, url } }) => ({ year, title, url })
+const publications: SimpleLink[] = (await getCollection('publications')).map(
+  ({ data: { local, year, title, url } }) => ({
+    name: `${local.split(' - ')[0]} (${year})`,
+    description: title,
+    homepage: url,
+  })
 );
 ---
 
 {
-  publications.length && (
+  !!publications.length && (
     <BaseSection title="Publicações">
       <nav>
         {publications.map((publication) => (
-          <SectionLink.Publication {...publication} />
+          <SectionLink.Simple {...publication} />
         ))}
       </nav>
     </BaseSection>

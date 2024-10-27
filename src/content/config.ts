@@ -10,13 +10,22 @@ const course = z.object({
   homepage: z.string(),
 });
 
+const program = z.object({
+  code: z.string(),
+  name: z.string(),
+  degree: z.string(),
+  homepage: z.string(),
+});
+
 const education = z.object({
   title: z.string(),
-  school: z.string(),
-  homepage: z.string().optional(),
-  description: z.string(),
+  workTitle: z.string().optional(),
+  school: z.string().optional(),
+  url: z.string().optional(),
+  description: z.string().optional(),
   startDate: z.number(),
-  endDate: z.union([z.number(), z.literal('-')]),
+  endDate: z.number().optional(),
+  program: program.optional(),
 });
 
 const experience = z.object({
@@ -25,13 +34,36 @@ const experience = z.object({
   homepage: z.string(),
   description: z.string(),
   startDate: z.number(),
-  endDate: z.union([z.number(), z.literal('-')]),
+  endDate: z.number().optional(),
 });
 
 const project = z.object({
   title: z.string(),
+  codeName: z.string(),
+  origin: z.string(),
+  description: z.string(),
+  homepage: z.string().optional(),
+  researchGroup: z.string().optional(),
+  type: z.string().optional(),
+  fundingCall: z.string().optional(),
+  startDate: z.number(),
+  endDate: z.number().optional(),
+});
+
+const code = z.object({
+  title: z.string(),
   description: z.string().optional(),
   homepage: z.string().optional(),
+});
+
+const patent = z.object({
+  title: z.string(),
+  number: z.string(),
+  nationality: z.string(),
+  type: z.string(),
+  origin: z.string(),
+  year: z.number(),
+  url: z.string().optional(),
 });
 
 const publication = z.object({
@@ -62,6 +94,16 @@ const projectCollection = defineCollection({
   schema: project,
 });
 
+const codeCollection = defineCollection({
+  type: 'data',
+  schema: code,
+});
+
+const patentCollection = defineCollection({
+  type: 'data',
+  schema: patent,
+});
+
 const publicationCollection = defineCollection({
   schema: publication,
   loader: () => loadPublications('src/content/_publications'),
@@ -72,5 +114,7 @@ export const collections = {
   educations: educationCollection,
   experiences: experienceCollection,
   projects: projectCollection,
+  codes: codeCollection,
+  patents: patentCollection,
   publications: publicationCollection,
 };

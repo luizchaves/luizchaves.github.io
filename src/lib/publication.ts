@@ -10,7 +10,7 @@ export function loadPublications(folder: string) {
   const files = fs.readdirSync(bibPath);
 
   const publications = files
-    .filter((file) => file.endsWith('.bib'))
+    .filter((file) => file.endsWith('.bib') && !file.startsWith('_'))
     .flatMap((file) => {
       const content = fs.readFileSync(path.join(bibPath, file), 'utf-8');
 

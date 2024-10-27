@@ -69,8 +69,6 @@ const links = [
     size: 36,
   },
 ] as Link[];
-
-console.log(linkSync);
 ---
 
 <html lang="en">
@@ -88,6 +86,7 @@ console.log(linkSync);
           src={ProfileImage}
           alt={PROFILE.name}
           class="rounded-full w-56 border border-black"
+          loading="eager"
         />
       </a>
       <p class="text-3xl font-bold">Olá, sou Luiz Carlos!</p>
@@ -100,6 +99,7 @@ console.log(linkSync);
               href={PROFILE.addresses[link.name]}
               class="rounded-full border-black border-2 size-14 flex items-center justify-center hover:bg-gray-200"
               title={link.name}
+              aria-label={link.name}
               target="_blank"
             >
               <Icon

@@ -1,27 +1,24 @@
 ---
-import type { Course } from '@/components/SectionLink/Course.astro';
+import type { SimpleLink } from '@/components/SectionLink/Simple.astro';
 import { getCollection } from 'astro:content';
 import BaseSection from '@/components/ProfileSection/BaseSection.astro';
 import SectionLink from '@/components/SectionLink';
 
-const courses: Course[] = (await getCollection('courses')).map(
+const courses: SimpleLink[] = (await getCollection('courses')).map(
   ({ data: { code, title, course, campus, homepage, description } }) => ({
-    code,
-    title,
-    course,
-    campus,
+    name: `${course}-${code}-${campus}`,
+    description: `${title}: ${description}`,
     homepage,
-    description,
   })
 );
 ---
 
 {
-  courses.length && (
+  !!courses.length && (
     <BaseSection title="Ensino">
       <nav>
         {courses.map((course) => (
-          <SectionLink.Course {...course} />
+          <SectionLink.Simple {...course} />
         ))}
       </nav>
     </BaseSection>

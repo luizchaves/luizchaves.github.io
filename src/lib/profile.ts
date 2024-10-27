@@ -23,7 +23,7 @@ export type Profile = {
 export const PROFILE: Profile = {
   name: 'Luiz Carlos Chaves',
   description:
-    'Professor do IFPB especializado na construção de sistemas Web, e pós-graduação em visualização de dados.',
+    'Professor do IFPB especializado na construção de sistemas Web e pós-graduação em visualização de dados.',
   addresses: {
     homepage: 'https://luizchaves.github.io',
     github: 'https://github.com/luizchaves',

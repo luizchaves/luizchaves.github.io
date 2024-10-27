@@ -1,0 +1,26 @@
+---
+import type { SimpleLink } from '@/components/SectionLink/Simple.astro';
+import { getCollection } from 'astro:content';
+import BaseSection from '@/components/ProfileSection/BaseSection.astro';
+import SectionLink from '@/components/SectionLink';
+
+const patents: SimpleLink[] = (await getCollection('patents')).map(
+  ({ data: { number, title, url, origin } }) => ({
+    name: number,
+    description: `${title} (${origin})`,
+    homepage: url,
+  })
+);
+---
+
+{
+  !!patents.length && (
+    <BaseSection title="Registro de Software">
+      <nav>
+        {patents.map((patent) => (
+          <SectionLink.Simple {...patent} />
+        ))}
+      </nav>
+    </BaseSection>
+  )
+}

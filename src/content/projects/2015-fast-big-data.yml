@@ -1,0 +1,7 @@
+title: 'FastBigData: uma Estratégia de Armazenamento Eficiente de Grandes Volumes de Dados'
+codeName: FastBigData
+type: Pequisa
+origin: IFPB
+description: Este projeto visa desenvolver uma infraestrutura de persistência de grande volume de dados com baixa latência, usando como estudo de caso inicial os dados em XML coletados da plataforma Lattes.
+startDate: 2015
+endDate: 2016

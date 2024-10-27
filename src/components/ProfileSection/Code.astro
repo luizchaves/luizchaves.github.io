@@ -1,0 +1,28 @@
+---
+import type { SimpleLink } from '@/components/SectionLink/Simple.astro';
+import { getCollection } from 'astro:content';
+import BaseSection from '@/components/ProfileSection/BaseSection.astro';
+import SectionLink from '@/components/SectionLink';
+
+const codes: SimpleLink[] = (await getCollection('codes')).map(
+  ({ data: { title, description, homepage } }) => ({
+    name: title,
+    description,
+    homepage,
+  })
+);
+
+codes.sort((a, b) => a.name.localeCompare(b.name));
+---
+
+{
+  !!codes.length && (
+    <BaseSection title="Códigos">
+      <nav>
+        {codes.map((code) => (
+          <SectionLink.Simple {...code} />
+        ))}
+      </nav>
+    </BaseSection>
+  )
+}

@@ -1,29 +1,35 @@
 ---
+import type { ActivityLink } from '@/components/SectionLink/Activity.astro';
 import { getCollection } from 'astro:content';
 import BaseSection from '@/components/ProfileSection/BaseSection.astro';
 import SectionLink from '@/components/SectionLink';
 
-type Project = {
-  title: string;
-  description: string;
-  homepage: string;
-};
-
-const projects: Project[] = (await getCollection('projects')).map(
-  ({ data }) => ({
-    title: data.title,
-    description: data.description,
-    homepage: data.homepage,
+const projects: ActivityLink[] = (await getCollection('projects')).map(
+  ({
+    data: { codeName, origin, type, description, homepage, startDate, endDate },
+  }) => ({
+    name: `${codeName} (${origin} - ${type})`,
+    description: description,
+    url: homepage,
+    startDate,
+    endDate: endDate ?? '-',
   })
 );
+
+projects.sort((a, b) => {
+  if (a.endDate === '-' && b.endDate !== '-') return -1;
+  if (a.endDate !== '-' && b.endDate === '-') return 1;
+  if (a.endDate === b.endDate) return Number(b.startDate) - Number(a.startDate);
+  return Number(b.endDate) - Number(a.endDate);
+});
 ---
 
 {
-  projects.length && (
+  !!projects.length && (
     <BaseSection title="Projetos">
       <nav>
-        {projects.map((occupation) => (
-          <SectionLink.Simple {...occupation} />
+        {projects.map((project) => (
+          <SectionLink.Activity {...project} />
         ))}
       </nav>
     </BaseSection>

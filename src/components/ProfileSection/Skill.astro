@@ -6,7 +6,7 @@ SKILLS.sort((a, b) => a.title.localeCompare(b.title));
 ---
 
 {
-  SKILLS.length && (
+  !!SKILLS.length && (
     <BaseSection title="Habilidades">
       <div class="flex flex-wrap gap-4">
         {SKILLS.map((skill) => (
