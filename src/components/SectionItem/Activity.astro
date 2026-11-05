@@ -9,11 +9,13 @@ export type Activity = {
 const { name, description, startDate, endDate } = Astro.props as Activity;
 ---
 
-<p class="md:w-1/4">{name}</p>
-<p class="md:flex-1 text-gray-500 order-1 md:order-none basis-full">
+<p class="cv-item-name md:w-1/4">{name}</p>
+<p
+  class="cv-item-desc md:flex-1 text-gray-500 order-1 md:order-none basis-full"
+>
   {description}
 </p>
-<p class="text-gray-500 flex">
+<p class="cv-item-dates text-gray-500 flex">
   <span class="tabular-nums">{startDate}</span>
   <span>-</span>
   {

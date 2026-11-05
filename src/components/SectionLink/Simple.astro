@@ -11,6 +11,6 @@ const { name, description, homepage } = Astro.props as SimpleLink;
 ---
 
 <BaseLink href={homepage}>
-  <p class="md:w-1/4">{name}</p>
-  <p class="md:flex-1 text-gray-500">{description}</p>
+  <p class="cv-item-name md:w-1/4">{name}</p>
+  <p class="cv-item-desc md:flex-1 text-gray-500">{description}</p>
 </BaseLink>

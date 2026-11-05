@@ -8,7 +8,7 @@ SKILLS.sort((a, b) => a.title.localeCompare(b.title));
 {
   !!SKILLS.length && (
     <BaseSection title="Habilidades">
-      <div class="flex flex-wrap gap-4">
+      <div class="cv-skills flex flex-wrap gap-4">
         {SKILLS.map((skill) => (
           <p>{skill.title}</p>
         ))}

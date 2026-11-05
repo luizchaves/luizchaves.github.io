@@ -2,6 +2,7 @@
 import { PROFILE } from '@/lib/profile';
 import ProfileSection from '@/components/ProfileSection';
 import HeroSection from '@/components/HeroSection.astro';
+import '@/styles/print.css';
 ---
 
 <html lang="en">
@@ -13,7 +14,7 @@ import HeroSection from '@/components/HeroSection.astro';
     <title>{PROFILE.name}</title>
   </head>
   <body class="text-lg">
-    <div class="container max-w-screen-md mx-auto space-y-14 px-4 my-20">
+    <div class="cv-page container max-w-screen-md mx-auto space-y-14 px-4 my-20">
       <HeroSection />
 
       <ProfileSection.Skill />

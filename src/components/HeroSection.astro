@@ -5,36 +5,48 @@ import ProfileImage from '@/assets/imgs/profile.png';
 import { PROFILE } from '@/lib/profile';
 
 const links = ['github', 'linkedin', 'email'] as AddressKeys[];
+
+// Endereço legível, exibido apenas na impressão (ver src/styles/print.css):
+// no papel o link precisa ser lido, não clicado.
+const printableAddress = (address: string) =>
+  address
+    .replace(/^mailto:/, '')
+    .replace(/^https?:\/\//, '')
+    .replace(/^www\./, '')
+    .replace(/\/$/, '');
 ---
 
-<div class="space-y-8 text-lg">
+<div class="cv-hero space-y-8 text-lg">
   <h1 class="text-3xl font-bold">{PROFILE.name}</h1>
 
-  <div class="flex gap-8 flex-col sm:flex-row">
+  <div class="cv-hero-body flex gap-8 flex-col sm:flex-row">
     <a href="/compact">
       <Image
         src={ProfileImage}
         alt={PROFILE.name}
-        class="rounded-md w-32 border border-black"
+        class="cv-hero-photo rounded-md w-32 border border-black"
         loading="eager"
       />
     </a>
 
-    <div class="space-y-4">
+    <div class="cv-hero-text space-y-4">
       <p>{PROFILE.description}</p>
 
       <nav>
-        <ul class="flex flex-wrap gap-4">
+        <ul class="cv-hero-links flex flex-wrap gap-4">
           {
             links.map((link) => (
               <li>
                 <a
                   href={PROFILE.addresses[link]}
-                  class="underline capitalize hover:no-underline"
+                  class="underline capitalize hover:no-underline print:no-underline"
                   target="_blank"
                 >
                   {link}
                 </a>
+                <span class="cv-hero-url hidden print:inline">
+                  {printableAddress(PROFILE.addresses[link])}
+                </span>
               </li>
             ))
           }

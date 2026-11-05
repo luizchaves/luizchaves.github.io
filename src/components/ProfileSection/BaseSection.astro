@@ -6,8 +6,8 @@ interface Props {
 const { title } = Astro.props as Props;
 ---
 
-<div class="space-y-4">
-  <h2 class="text-2xl font-semibold">{title}</h2>
+<div class="cv-section space-y-4">
+  <h2 class="cv-section-title text-2xl font-semibold">{title}</h2>
 
   <slot />
 </div>

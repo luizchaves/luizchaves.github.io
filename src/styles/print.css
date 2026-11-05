@@ -1,0 +1,171 @@
+/*
+ * Versão de impressão do currículo (src/pages/index.astro).
+ *
+ * Dois objetivos:
+ *
+ * 1. Mostrar o endereço de cada link do perfil (github, linkedin, email),
+ *    já que no papel o link não pode ser clicado. O texto do endereço está
+ *    no HTML com `hidden print:inline`.
+ *
+ * 2. Compactar o layout para caber em menos páginas: tipografia menor,
+ *    menos respiro vertical e os itens de volta ao formato de colunas.
+ *    Isso é necessário porque a largura útil da página (~186mm ≈ 700px)
+ *    fica abaixo do breakpoint `md` (768px) do Tailwind: sem estas regras
+ *    o navegador imprime o layout empilhado da versão mobile e cada item
+ *    ocupa duas ou três linhas.
+ *
+ * Os `!important` existem para vencer as utilitárias do Tailwind, que têm
+ * a mesma especificidade das classes `cv-*` usadas aqui.
+ */
+
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  html,
+  body {
+    background: #fff;
+    color: #111;
+  }
+
+  /* O `text-lg` do body é grande demais para papel. */
+  body {
+    font-size: 9pt !important;
+    line-height: 1.35 !important;
+  }
+
+  p {
+    orphans: 2;
+    widows: 2;
+  }
+
+  /* Sem sublinhado nem cor: o endereço aparece ao lado do rótulo. */
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+
+  /* ---------------------------------------------------------- container */
+
+  .cv-page {
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* substitui o `space-y-14` da tela */
+  .cv-page > * + * {
+    margin-top: 5mm !important;
+  }
+
+  /* ---------------------------------------------------------- cabeçalho */
+
+  .cv-hero {
+    font-size: inherit !important;
+  }
+
+  .cv-hero > * + * {
+    margin-top: 2.5mm !important;
+  }
+
+  .cv-hero h1 {
+    font-size: 16pt !important;
+    line-height: 1.1 !important;
+  }
+
+  .cv-hero-body {
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 5mm !important;
+  }
+
+  .cv-hero-photo {
+    width: 22mm !important;
+    border-radius: 1mm !important;
+  }
+
+  .cv-hero-text > * + * {
+    margin-top: 2mm !important;
+  }
+
+  .cv-hero-links {
+    gap: 0 5mm !important;
+  }
+
+  /* "Github github.com/luizchaves" */
+  .cv-hero-url::before {
+    content: ' ';
+  }
+
+  .cv-hero-url {
+    color: #333 !important;
+  }
+
+  /* ------------------------------------------------------------- seções */
+
+  .cv-section > * + * {
+    margin-top: 1.5mm !important;
+  }
+
+  .cv-section-title {
+    font-size: 11pt !important;
+    line-height: 1.2 !important;
+    padding-bottom: 0.8mm;
+    border-bottom: 0.5pt solid #bbb;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  /* -------------------------------------------------------------- itens */
+
+  .cv-item {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: baseline !important;
+    justify-content: flex-start !important;
+    gap: 0 3mm !important;
+    margin: 0 !important;
+    padding: 0.4mm 0 !important;
+    background: none !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .cv-item-name {
+    flex: 0 0 42mm !important;
+    width: auto !important;
+  }
+
+  .cv-item-desc {
+    flex: 1 1 auto !important;
+    order: 0 !important;
+    color: #333 !important;
+  }
+
+  .cv-item-dates {
+    flex: 0 0 auto !important;
+    margin-left: auto !important;
+    padding-left: 2mm;
+    white-space: nowrap !important;
+    color: #333 !important;
+  }
+
+  /* -------------------------------------------------------- habilidades */
+
+  .cv-skills {
+    display: block !important;
+    gap: 0 !important;
+  }
+
+  .cv-skills > p {
+    display: inline !important;
+  }
+
+  .cv-skills > p + p::before {
+    content: ' · ';
+    color: #999;
+  }
+}
